@@ -15,11 +15,13 @@ public class Code12 {
 
         int maxSum = 0;
         for(int i=0;i<n;i++){
+            int sum = 0;
             for(int j=i;j<n;j++){
-                int sum = 0;
-                for(int k=i;k<=j;k++){
-                    sum += data[k];
-                }
+//                int sum = 0;
+//                for(int k=i;k<=j;k++){
+//                    sum += data[k];
+//                }
+                sum += data[j];
                 if(sum > maxSum){
                     maxSum = sum;
                 }
