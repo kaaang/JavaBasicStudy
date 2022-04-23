@@ -1,6 +1,4 @@
-package study01;
-
-import java.util.Scanner;
+package Chapter1.study01;
 
 public class Code10 {
     public static void main(String[] args) {

@@ -1,13 +1,15 @@
-package study03;
+package Chapter2.Section1;
 
 import java.io.*;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Code22 {
+public class IndexMaker {
 
-    static String[] words = new String[100000];
-    static int[] count = new int[100000];
+    static Item[] items = new Item[10000];
+
+//    static String[] words = new String[100000];
+//    static int[] count = new int[100000];
     static int n = 0;
 
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class Code22 {
                 String str = kb.next();
                 int index = findWord(str);
                 if(index > -1){
-                    System.out.println("The word " + words[index] + " appears " + count[index] + " times.");
+                    System.out.println("The word " + items[index].word + " appears " + items[index].count + " times.");
                 }else{
                     System.out.println("The word " + str + "does not appears.");
                 }
@@ -44,7 +46,7 @@ public class Code22 {
         try {
             outFile = new PrintWriter(new FileWriter(fileName));
             for (int i=0; i<n; i++){
-                outFile.println(words[i] + " " + count[i]);
+                outFile.println(items[i].word + " " + items[i].count);
             }
             outFile.close();
         } catch (IOException e) {
@@ -76,22 +78,24 @@ public class Code22 {
         int index = findWord(str);
 
         if(index != -1){ //단어가 이미 존재할때
-            count[index]++;
+            items[index].count++;
         }else{
             int i = n-1;
-            for(; i>=0 && words[i].compareToIgnoreCase(str)>0; i--){
-                words[i+1] = words[i];
-                count[i+1] = count[i];
+            for(; i>=0 && items[i].word.compareToIgnoreCase(str)>0; i--){
+                items[i+1] = items[i];
+//                items[i+1].word = items[i].word;
+//                items[i+1].count = items[i].count;
             }
-            words[i+1] = str;
-            count[i+1] = 1;
+            items[i+1] = new Item();
+            items[i+1].word = str;
+            items[i+1].count = 1;
             n++;
         }
     }
 
     static int findWord(String str){
         for(int i=0;i<n;i++){
-            if(words[i].equalsIgnoreCase(str)){
+            if(items[i].word.equalsIgnoreCase(str)){
                 return i;
             }
         }
