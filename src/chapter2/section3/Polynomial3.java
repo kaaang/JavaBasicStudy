@@ -1,4 +1,4 @@
-package chapter2.section2;
+package chapter2.section3;
 
 public class Polynomial3 {
     public char name;
@@ -7,13 +7,13 @@ public class Polynomial3 {
 
     public Polynomial3(){
         nTerms = 0;
-        terms = new Term3 [100];
+        terms = new Term3[100];
     }
 
     public Polynomial3(char name){
         this.name = name;
         nTerms = 0;
-        terms = new Term3 [100];
+        terms = new Term3[100];
     }
 
     public int calcPolynomial(int x) {
