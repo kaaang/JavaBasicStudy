@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class Scheduler {
 
-    public Event[] events = new Event[100];
+    private int capacity;
+    public Event[] events = new Event[capacity];
     public int n=0;
     private Scanner kb;
 
@@ -23,7 +24,7 @@ public class Scheduler {
                     handleAddDeadlinedEvent();
                 }
             }else if(command.equals("list")){
-
+                handleList();
             }else if(command.equals("show")){
 
             }else if(command.equals("exit")){
@@ -31,6 +32,12 @@ public class Scheduler {
             }
         }
         kb.close();
+    }
+
+    private void handleList() {
+        for(int i=0;i<n;i++){
+            System.out.println("    " + events[i].toString());
+        }
     }
 
     private void handleAddDeadlinedEvent() {
@@ -43,14 +50,30 @@ public class Scheduler {
         System.out.print("    when : ");
         String dateString = kb.next();
         System.out.print("    title : ");
-        String title = kb.nextLine();
+        String title = kb.next();
 
         MyDate date = parseDateString(dateString);
 
-
         OneDayEvent ev = new OneDayEvent(title, date);
-        events[n++] = ev;
 
+        addEvent(ev);
+
+    }
+
+    private void addEvent(OneDayEvent ev) {
+        if(n >= capacity){
+            reallocate();
+        }
+        events[n++] = ev;
+    }
+
+    private void reallocate() {
+        Event[] tmp = new Event[capacity*2];
+        for(int i=0;i<n;i++){
+            tmp[i] = events[i];
+        }
+        events = tmp;
+        capacity *=2;
     }
 
     private MyDate parseDateString(String dateString) {
@@ -65,6 +88,11 @@ public class Scheduler {
     }
 
     public static void main(String[] args) {
+
+//        String str = "This is    a  test   string";
+//        String[] str_tokens = str.split("[ ]+");
+//        String[] str_tokens = str.split("\\s"); //모든 white space 검출
+
         Scheduler app = new Scheduler();
         app.processCommand();
     }
