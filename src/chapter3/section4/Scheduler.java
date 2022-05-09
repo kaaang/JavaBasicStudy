@@ -26,12 +26,23 @@ public class Scheduler {
             }else if(command.equals("list")){
                 handleList();
             }else if(command.equals("show")){
-
+                handleShow();
             }else if(command.equals("exit")){
                 break;
             }
         }
         kb.close();
+    }
+
+    private void handleShow() {
+        String dateString = kb.next();
+        MyDate theDate = parseDateString(dateString);
+
+        for(int i=0;i<n;i++){
+            if(events[i].isRelevant(theDate)){
+                System.out.println(events[i].toString());
+            }
+        }
     }
 
     private void handleList() {
