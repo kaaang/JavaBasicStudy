@@ -12,6 +12,11 @@ public class OneDayEvent extends Event {
         return this.date.compareTo(date) == 0;
     }
 
+    @Override
+    public MyDate getRepresentativeDate() {
+        return date;
+    }
+
     public String toString(){
         return title + ", " + date.toString();
     }

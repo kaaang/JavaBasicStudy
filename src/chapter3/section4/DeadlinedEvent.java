@@ -12,6 +12,11 @@ public class DeadlinedEvent extends Event {
         return deadline.compareTo(date) >= 0;
     }
 
+    @Override
+    public MyDate getRepresentativeDate() {
+        return deadline;
+    }
+
     public String toString(){
         return title + ", " + deadline.toString();
     }
