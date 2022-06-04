@@ -16,6 +16,7 @@ public class MyArrayList<E> {
     public void add(int index, E anEntity){
         if(index < 0 || index > size){
             throw new ArrayIndexOutOfBoundsException(index);
+
         }
 
         if(size >= capacity){
