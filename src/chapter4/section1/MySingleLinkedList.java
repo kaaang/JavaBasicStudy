@@ -25,7 +25,16 @@ public class MySingleLinkedList<T> {
     }
 
     public void add(int index, T item){
+        if(index < 0 || index > size){
+            return;
+        }
 
+        if(index == 0){
+            addFirst(item);
+        }else{
+            Node<T> q = getNode(index-1);
+            addAfter(q, item);
+        }
     }
 
     public T removeFirst(){
@@ -44,19 +53,68 @@ public class MySingleLinkedList<T> {
         }
         T temp = before.next.data;
         before.next = before.next.next;
+        size--;
         return temp;
     }
 
-    public void remove(int index){
+    public T remove(int index){
+        if(index < 0 || index >= size){
+            return null;
+        }
 
+        if(index==0){
+            return removeFirst();
+        }
+        Node<T> prev = getNode(index-1);
+        return removeAfter(prev);
     }
 
-    public T get(int index){
-        return null;
+    public T remove(T item){
+        Node<T> p = head;
+        Node<T> q = null;
+        while (p!= null && p.data.equals(item)){
+            q=p;
+            p=p.next;
+        }
+        if(p == null){
+            return null;
+        }
+        if(q==null){
+            return removeFirst();
+        }else{
+            return removeAfter(q);
+        }
     }
 
     public int indexOf(T item){
+        Node<T> p = head;
+        int index = 0;
+        while (p!= null){
+            if(p.data.equals(item)){
+                return index;
+            }
+            p = p.next;
+            index++;
+        }
         return -1;
+    }
+
+    public T get(int index){
+        if(index < 0 || index >= size){
+            return null;
+        }
+        return getNode(index).data;
+    }
+
+    public Node<T> getNode(int index){
+        if(index < 0 || index >= size){
+            return null;
+        }
+        Node<T> p = head;
+        for(int i=0;i<index;i++){
+            p=p.next;
+        }
+        return p;
     }
 
 
